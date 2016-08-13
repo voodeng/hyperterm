@@ -46,7 +46,6 @@
     "eslint-plugin-promise": "^2.0.0",
     "eslint-plugin-react": "^6.0.0",
     "eslint-plugin-standard": "^2.0.0",
-    "husky": "^0.11.6",
     "webpack": "^2.1.0-beta.15"
   },
   "eslintConfig": {
@@ -101,7 +100,7 @@
   "scripts": {
     "dev": "webpack --watch",
     "lint": "eslint .",
-    "build": "NODE_ENV=production webpack",
+    "build": "webpack",
     "test": "npm run lint && electron-mocha test/*",
     "start": "electron app",
     "prepublish": "npm test",

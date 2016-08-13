@@ -8,7 +8,8 @@ const config = require('./config');
 
 let spawn;
 try {
-  spawn = require('child_pty').spawn;
+  // spawn = require('child_pty').spawn;
+  spawn = require('ptyw.js').spawn;
 } catch (err) {
   console.error(
     'A native module failed to load. Typically this means ' +
@@ -44,7 +45,7 @@ module.exports = class Session extends EventEmitter {
       this.emit('data', data.toString('utf8'));
     });
 
-    this.pty.on('exit', () => {
+    this.pty.on('close', () => {
       if (!this.ended) {
         this.ended = true;
         this.emit('exit');
@@ -109,7 +110,7 @@ module.exports = class Session extends EventEmitter {
 
   resize ({ cols: columns, rows }) {
     try {
-      this.pty.stdout.resize({ columns, rows });
+      this.pty.stdout.resize( columns, rows );
     } catch (err) {
       console.error(err.stack);
     }
