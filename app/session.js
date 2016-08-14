@@ -25,7 +25,7 @@ const envFromConfig = config.getConfig().env || {};
 
 module.exports = class Session extends EventEmitter {
 
-  constructor ({ rows, cols: columns, cwd, shell }) {
+  constructor ({ rows, cols: columns, cwd, shell, shellArgs }) {
     super();
     const baseEnv = Object.assign({}, process.env, {
       LANG: app.getLocale().replace('-', '_') + '.UTF-8',
@@ -34,7 +34,9 @@ module.exports = class Session extends EventEmitter {
       TERM_PROGRAM_VERSION: version
     }, envFromConfig);
 
-    this.pty = spawn(shell || defaultShell, ['--login'], {
+    const defaultShellArgs = ['--login'];
+
+    this.pty = spawn(shell || defaultShell, shellArgs || defaultShellArgs, {
       columns,
       rows,
       cwd,
