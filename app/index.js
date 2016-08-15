@@ -80,6 +80,7 @@ app.on('ready', () => {
       }
     }
 
+
     const browserDefaults = {
       width,
       height,
@@ -95,6 +96,9 @@ app.on('ready', () => {
       show: process.env.HYPERTERM_DEBUG || isDev,
       x: startX,
       y: startY
+
+      // ,transparent: true
+      // ,frame: false
     };
     const browserOptions = plugins.getDecoratedBrowserOptions(browserDefaults);
 
@@ -337,6 +341,20 @@ app.on('ready', () => {
         {label: 'New Window', click () { createWindow(); }}
       ]);
       app.dock.setMenu(dockMenu);
+    }
+
+    // try windows tray...
+    let useTray = 1;
+    if (process.platform === 'win32' && useTray==1) {
+      const { app, Menu, Tray } = require('electron');
+      const path = require('path');
+      trayIcon = new Tray(path.join(__dirname, 'static/icon.png'));
+      let ttpl = [
+        {label: 'New Window', click () { createWindow(); }},
+        {label: 'Quit HyperTerm', click() { app.quit(); }}
+      ];
+      const trayMenu = Menu.buildFromTemplate(ttpl);
+      trayIcon.setContextMenu(trayMenu);
     }
 
     Menu.setApplicationMenu(Menu.buildFromTemplate(tpl));

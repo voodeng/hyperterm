@@ -16,11 +16,12 @@
     "electron-is-dev": "0.1.1",
     "file-uri-to-path": "0.0.2",
     "gaze": "1.1.0",
+    "menubar": "^5.1.0",
     "mkdirp": "0.5.1",
     "ms": "0.7.1",
+    "ptyw.js": "^0.4.0",
     "shell-env": "0.2.0",
-    "uuid": "2.0.2",
-    "ptyw.js": "^0.4.0"
+    "uuid": "2.0.2"
   },
   "eslintConfig": {
     "extends": "standard",

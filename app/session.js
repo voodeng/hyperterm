@@ -112,7 +112,7 @@ module.exports = class Session extends EventEmitter {
 
   resize ({ cols: columns, rows }) {
     try {
-      this.pty.stdout.resize( columns, rows );
+      this.pty.stdout.resize(columns, rows);
     } catch (err) {
       console.error(err.stack);
     }
